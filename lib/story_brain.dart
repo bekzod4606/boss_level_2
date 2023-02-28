@@ -41,9 +41,22 @@ class StoryBrain {
         choice1: 'Restart',
         choice2: '')
   ];
-  void nextStory() {
-    if (_storyNumber < _storyData.length - 1) {
-      _storyNumber++;
+
+  void nextStory(int choiceNumber) {
+    if (choiceNumber == 1 && _storyNumber == 0) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 0) {
+      _storyNumber = 1;
+    } else if (choiceNumber == 1 && _storyNumber == 1) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 1) {
+      _storyNumber = 3;
+    } else if (choiceNumber == 1 && _storyNumber == 2) {
+      _storyNumber = 5;
+    } else if (choiceNumber == 2 && _storyNumber == 2) {
+      _storyNumber = 4;
+    } else if (choiceNumber == 3 || choiceNumber == 4 || choiceNumber == 5) {
+      reset();
     }
   }
 
@@ -57,6 +70,18 @@ class StoryBrain {
 
   String getChoice2() {
     return _storyData[_storyNumber].choice2 ?? " ";
+  }
+
+  void reset() {
+    _storyNumber = 0;
+  }
+
+  bool buttonShouldBeVisible() {
+    if (_storyNumber == 0 || _storyNumber == 1 || _storyNumber == 2) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
